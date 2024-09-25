@@ -3,30 +3,37 @@
 </script>
 
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <RouterLink class="navbar-brand" to="/">Navbar</RouterLink>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg fixed-top bg-light shadow-sm">
+        <div class="container">
+            <RouterLink class="navbar-brand text-dark fw-semibold ms-3 ms-md-0" to="/">Loop Planner</RouterLink>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <RouterLink class="nav-link active" aria-current="page" to="/">Home</RouterLink>
-                    </li>
-                    <li class="nav-item">
-                        <RouterLink class="nav-link" to="/whatever">Whatever</RouterLink>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header px-4 pt-4">
+                    <h5 class="offcanvas-title text-dark fw-semibold" id="offcanvasNavbarLabel">Loop Planner</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body py-0 px-4">
+                    <ul class="navbar-nav justify-content-end flex-grow-1">
+                        <li class="nav-item">
+                            <RouterLink class="nav-link me-lg-2" to="/add">Ny opgave +</RouterLink>
+                        </li>
+                        <li class="nav-item">
+                            <RouterLink class="nav-link mx-lg-2" to="/">Information</RouterLink>
+                        </li>
+                        <li class="nav-item">
+                            <RouterLink class="nav-link ms-lg-2" to="/">Gendan plan</RouterLink>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 </template>
 
 <style scoped>
-
+.navbar {
+    min-height: 70px;
+}
 </style>

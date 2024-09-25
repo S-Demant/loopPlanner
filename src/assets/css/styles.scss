@@ -4,13 +4,29 @@
 // 2. Include any default variable overrides here
 $link-decoration: none;
 
+// Colors
+$light: #FCFCFC;
+$dark: #797979;
+
+// Navbar
+$navbar-light-color: $dark;
+$link-shade-percentage: 30%;
+$navbar-light-active-color: shift-color($navbar-light-color, $link-shade-percentage);
+$navbar-light-hover-color: shift-color($navbar-light-color, $link-shade-percentage);
+$navbar-toggler-font-size: 18pt;
+$navbar-light-disabled-color: $dark;
+$navbar-light-icon-color: $dark;
+$navbar-light-toggler-border-color: none;
+$navbar-toggler-focus-width: 0px;
+
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../../../node_modules/bootstrap/scss/variables-dark";
 
 // 4. Include any default map overrides here
 $custom-colors: (
-    "farve": $cyan-400,
+    "light": $light,
+    "dark": $dark
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -18,3 +34,12 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrapComponents";
 
 // 5. Du kan lave styling her...
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: $light;
+    color: $dark;
+    font-family: "Albert Sans", sans-serif;
+    font-optical-sizing: auto;
+    letter-spacing: 0.7pt;
+}
