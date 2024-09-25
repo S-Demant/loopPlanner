@@ -30,10 +30,15 @@
             </div>
         </div>
     </nav>
+    <div class="top-bottom"></div>
 </template>
 
 <style scoped>
 .navbar {
     min-height: 70px;
+}
+
+.top-bottom {
+    margin-bottom: 105px;
 }
 </style>
