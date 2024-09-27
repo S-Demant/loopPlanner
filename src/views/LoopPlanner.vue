@@ -3,17 +3,7 @@ import Navbar from "../components/Navbar.vue";
 import Plan from "@/components/Plan.vue";
 import {ref} from "vue";
 
-const savedItems = localStorage.getItem('mondayData');
-const mondayArray = savedItems;
-
-if (savedItems) { // Hvis der er gemt noget i local storage, hent det
-    console.log("Gemt data er indlæst")
-    console.log(mondayArray)
-} else if (!savedItems) {
-    console.log("Nej, gemt data er ikke indlæst")
-}
-
-
+const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
 
 </script>
 
@@ -24,9 +14,7 @@ if (savedItems) { // Hvis der er gemt noget i local storage, hent det
         <h2 class="mb-4">Dagens plan</h2>
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-5">
             <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I dag mandag d. 25 september</h3>
-            <Plan :title="mondayArray.value" />
-            <Plan :title="'Vande blomster'" />
-            <Plan :title="'Græsklipning'" />
+            <Plan v-for="(plan) in mondayArray" :picked-color="plan.color" :title="plan.title" />
         </div>
 
         <h2 class="mb-4">Kommende planer</h2>

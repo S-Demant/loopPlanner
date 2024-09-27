@@ -1,37 +1,11 @@
 <script setup>
 import {ref} from 'vue';
+import Plan from "@/components/Plan.vue";
 
-const message = ref('');
-
-/*
-const test = [{
-    plan: {
-        title: message,
-        note: "Dette er noten"
-    }
-}]
-
-function addNewObject (newObject) {
-    test.push( // Med push kan man tilføje til array. Dette er datoer / ugedage
-        {
-            plan: {
-                title: "Dette er titlen",
-                note: "Dette er noten"
-            }
-        }
-    );
-    console.log(test);
-}
-
-function save() {
-    localStorage.setItem('userData', JSON.stringify(test));
-}
-*/
-
-let mondayArray = ref([]);
+const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
+const selectedColor = ref();
 let addTitle;
 let addNote;
-let addColor;
 
 function addNewObjectToMonday (newTitle, newNote, newColor) {
     mondayArray.value.push( // Med push kan man tilføje til array
@@ -42,21 +16,60 @@ function addNewObjectToMonday (newTitle, newNote, newColor) {
             color: newColor
         },
     )
+    console.log(selectedColor)
 }
-
-const colorRed = '#DA8686';
 
 function saveMonday() {
     localStorage.setItem('mondayData', JSON.stringify(mondayArray.value));
 }
 
-function load() {
-    return JSON.parse(localStorage.getItem('mondayData'));
-}
-
-function consoleView() {
-    console.log(mondayArray.value);
-}
+let colors = [
+    {
+        id: 1,
+        name: "Rød",
+        colorCode: "#DA8686"
+    },
+    {
+        id: 2,
+        name: "Orange",
+        colorCode: "#DABD86"
+    },
+    {
+        id: 3,
+        name: "Gul",
+        colorCode: "#DADA86"
+    },
+    {
+        id: 4,
+        name: "Grøn",
+        colorCode: "#86DA89"
+    },
+    {
+        id: 5,
+        name: "Mint",
+        colorCode: "#86DAB0"
+    },
+    {
+        id: 6,
+        name: "Lyseblå",
+        colorCode: "#86D7DA"
+    },
+    {
+        id: 7,
+        name: "Blå",
+        colorCode: "#86BEDA"
+    },
+    {
+        id: 8,
+        name: "Lilla",
+        colorCode: "#869EDA"
+    },
+    {
+        id: 9,
+        name: "Pink",
+        colorCode: "#D686DA"
+    }
+]
 
 </script>
 
@@ -68,42 +81,34 @@ function consoleView() {
                 <input type="text" class="form-control" id="titleToSave" value="" v-model="addTitle">
             </div>
             <div class="col-auto">
-                <select class="form-select" aria-label="Default select example" v-model="addColor">
-                    <option selected>Vælg farve</option>
-                    <option value="Rød">Rød</option>
-                    <option value="Grøn">Grøn</option>
-                    <option value="Blå">Blå</option>
+                <select class="form-select" aria-label="Default select example" v-model="selectedColor">
+                    <option class="text-light" :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" v-for="(color) in colors">{{ color.name }}
+                    </option>
                 </select>
             </div>
             <div class="col-auto">
                 <textarea v-model="addNote" placeholder=""></textarea>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3" @click = "addNewObjectToMonday(newTitle = addTitle, newNote = addNote, newColor = addColor); saveMonday()">Gem titel</button>
+                <button type="submit" class="btn btn-primary mb-3" @click = "addNewObjectToMonday(newTitle = addTitle, newNote = addNote, newColor = selectedColor); saveMonday()">Gem titel</button>
             </div>
         </form>
-        <br>
-        <p>Message is: {{ message }}</p>
-        <br>
-        <div>Selected: {{ addColor }}</div>
 
         <br>
-        <li v-for="(plan) in mondayArray" v-if="!awesome" :style="{ color: colorRed }">
+
+        <li v-for="(plan) in mondayArray" :style="{ color: plan.color }">
             {{ plan.id }} {{ plan.title }} {{ plan.note }} {{ plan.color }}
         </li>
 
         <br>
-        <p class="btn btn-primary" @click = "load()">Load knap</p>
-        <br>
-        <p class="btn btn-primary" @click = "consoleView()">Console knap</p>
-        <br>
-        <p class="btn btn-primary" @click = "addNewObject(newObject = 'Nyt objekt'); save()">Tilføj test knap</p>
-        <br>
-        <p class="btn btn-primary" @click = "addNewObjectToMonday(newObject = 'Nyt objekt'); saveMonday()">Tilføj til mandag</p>
+
+        <Plan v-for="(plan) in mondayArray" :picked-color="plan.color" :title="plan.title" />
 
     </div>
 </template>
 
 <style scoped>
-
+.form-select {
+    background-color: v-bind(selectedColor)
+}
 </style>
