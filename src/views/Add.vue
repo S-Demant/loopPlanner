@@ -1,5 +1,5 @@
 <script setup>
-import {ref, toRef} from 'vue';
+import {ref} from 'vue';
 
 const message = ref('');
 
@@ -31,16 +31,20 @@ function save() {
 let mondayArray = ref([]);
 let addTitle;
 let addNote;
+let addColor;
 
-function addNewObjectToMonday (newTitle, newNote) {
+function addNewObjectToMonday (newTitle, newNote, newColor) {
     mondayArray.value.push( // Med push kan man tilføje til array
         {
             id: mondayArray.value.length,
             title: newTitle,
-            note: newNote
+            note: newNote,
+            color: newColor
         },
     )
 }
+
+const colorRed = '#DA8686';
 
 function saveMonday() {
     localStorage.setItem('mondayData', JSON.stringify(mondayArray.value));
@@ -64,19 +68,28 @@ function consoleView() {
                 <input type="text" class="form-control" id="titleToSave" value="" v-model="addTitle">
             </div>
             <div class="col-auto">
+                <select class="form-select" aria-label="Default select example" v-model="addColor">
+                    <option selected>Vælg farve</option>
+                    <option value="Rød">Rød</option>
+                    <option value="Grøn">Grøn</option>
+                    <option value="Blå">Blå</option>
+                </select>
+            </div>
+            <div class="col-auto">
                 <textarea v-model="addNote" placeholder=""></textarea>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3" @click = "addNewObjectToMonday(newTitle = addTitle, newNote = addNote); saveMonday()">Gem titel</button>
+                <button type="submit" class="btn btn-primary mb-3" @click = "addNewObjectToMonday(newTitle = addTitle, newNote = addNote, newColor = addColor); saveMonday()">Gem titel</button>
             </div>
         </form>
         <br>
         <p>Message is: {{ message }}</p>
         <br>
+        <div>Selected: {{ addColor }}</div>
 
         <br>
-        <li v-for="(plan) in mondayArray">
-            {{ plan.id }} {{ plan.title }} {{ plan.note }}
+        <li v-for="(plan) in mondayArray" v-if="!awesome" :style="{ color: colorRed }">
+            {{ plan.id }} {{ plan.title }} {{ plan.note }} {{ plan.color }}
         </li>
 
         <br>
