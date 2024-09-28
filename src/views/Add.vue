@@ -1,14 +1,31 @@
 <script setup>
 import {ref} from 'vue';
 import Plan from "@/components/Plan.vue";
+import router from "@/router/index.js";
 
 const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
-const selectedColor = ref();
-let addTitle;
-let addNote;
+const tuesdayArray = ref(JSON.parse(localStorage.getItem('tuesdayData') ?? '[]' ));
+const selectedDay = ref('');
+const selectedColor = ref('');
+let addTitle = '';
+let addNote = '';
 
-function addNewObjectToMonday (newTitle, newNote, newColor) {
-    mondayArray.value.push( // Med push kan man tilføje til array
+function pickDay (newTitle, newNote, newColor, newDay) {
+    if (selectedDay.value > 0 && addTitle.length >= 3 && selectedColor.value.includes('#')) { // Gør følgende hvis der er værdi i ugedag, titel og farve
+        newDay = selectedDay
+        if (newDay.value === 1) {
+            addNewObjectToMonday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
+        } else if (newDay.value === 2) {
+            addNewObjectToTuesday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
+        }
+        router.push('.') // Gå til start
+    } else { // Gør følgende i stedet
+        return
+    }
+}
+
+function addNewObjectToMonday (newTitle, newNote, newColor) { // Funktion når der tilføjes til mandag
+    mondayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
             id: mondayArray.value.length,
             title: newTitle,
@@ -16,12 +33,31 @@ function addNewObjectToMonday (newTitle, newNote, newColor) {
             color: newColor
         },
     )
-    console.log(selectedColor)
+    localStorage.setItem('mondayData', JSON.stringify(mondayArray.value)); // Her gemmes mondayData hver gang funktionen bliver kaldt
 }
 
-function saveMonday() {
-    localStorage.setItem('mondayData', JSON.stringify(mondayArray.value));
+function addNewObjectToTuesday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
+    tuesdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
+        {
+            id: tuesdayArray.value.length,
+            title: newTitle,
+            note: newNote,
+            color: newColor
+        },
+    )
+    localStorage.setItem('tuesdayData', JSON.stringify(tuesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
 }
+
+let days = [
+    {
+        id: 1,
+        name: "Mandag"
+    },
+    {
+        id: 2,
+        name: "Tirsdag"
+    }
+]
 
 let colors = [
     {
@@ -75,14 +111,20 @@ let colors = [
 
 <template>
     <div class="container">
-        <form class="row g-3" method="post" @submit.prevent="formSubmit">
+        <form class="row g-3">
+            <div class="col-auto">
+                <select class="form-select" aria-label="Day select" v-model="selectedDay">
+                    <option v-for="(day) in days" :value="day.id">{{ day.name }}
+                    </option>
+                </select>
+            </div>
             <div class="col-auto">
                 <label for="titleToSave" class="visually-hidden">Title</label>
                 <input type="text" class="form-control" id="titleToSave" value="" v-model="addTitle">
             </div>
             <div class="col-auto">
-                <select class="form-select" aria-label="Default select example" v-model="selectedColor">
-                    <option class="text-light" :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" v-for="(color) in colors">{{ color.name }}
+                <select class="form-select text-light" id="color-select" aria-label="Color select" v-model="selectedColor">
+                    <option :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" v-for="(color) in colors">{{ color.name }}
                     </option>
                 </select>
             </div>
@@ -90,7 +132,7 @@ let colors = [
                 <textarea v-model="addNote" placeholder=""></textarea>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3" @click = "addNewObjectToMonday(newTitle = addTitle, newNote = addNote, newColor = selectedColor); saveMonday()">Gem titel</button>
+                <button type="button" class="btn btn-primary mb-3" @click ="pickDay();">Gem titel</button>
             </div>
         </form>
 
@@ -101,14 +143,23 @@ let colors = [
         </li>
 
         <br>
+        <br>
+
+        <li v-for="(plan) in tuesdayArray" :style="{ color: plan.color }">
+            {{ plan.id }} {{ plan.title }} {{ plan.note }} {{ plan.color }}
+        </li>
+
+        <br>
 
         <Plan v-for="(plan) in mondayArray" :picked-color="plan.color" :title="plan.title" />
+        <br>
+        <Plan v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="plan.title" />
 
     </div>
 </template>
 
 <style scoped>
-.form-select {
+#color-select  {
     background-color: v-bind(selectedColor)
 }
 </style>
