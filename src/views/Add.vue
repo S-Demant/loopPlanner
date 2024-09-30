@@ -5,6 +5,11 @@ import router from "@/router/index.js";
 
 const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
 const tuesdayArray = ref(JSON.parse(localStorage.getItem('tuesdayData') ?? '[]' ));
+const wednesdayArray = ref(JSON.parse(localStorage.getItem('wednesdayData') ?? '[]' ));
+const thursdayArray = ref(JSON.parse(localStorage.getItem('thursdayData') ?? '[]' ));
+const fridayArray = ref(JSON.parse(localStorage.getItem('fridayData') ?? '[]' ));
+const saturdayArray = ref(JSON.parse(localStorage.getItem('saturdayData') ?? '[]' ));
+const sundayArray = ref(JSON.parse(localStorage.getItem('sundayData') ?? '[]' ));
 const selectedDay = ref('');
 const selectedColor = ref('');
 let addTitle = '';
@@ -21,6 +26,16 @@ function pickDay (newTitle, newNote, newColor, newDay) {
             addNewObjectToMonday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
         } else if (newDay.value === 2) {
             addNewObjectToTuesday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
+        } else if (newDay.value === 3) {
+            addNewObjectToWednesday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
+        } else if (newDay.value === 4) {
+            addNewObjectToThursday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
+        } else if (newDay.value === 5) {
+            addNewObjectToFriday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
+        } else if (newDay.value === 6) {
+            addNewObjectToSaturday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
+        } else if (newDay.value === 7) {
+            addNewObjectToSunday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
         }
         router.push('/') // Gå til start
     }
@@ -70,6 +85,66 @@ function addNewObjectToTuesday (newTitle, newNote, newColor) { // Funktion når 
     localStorage.setItem('tuesdayData', JSON.stringify(tuesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
 }
 
+function addNewObjectToWednesday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
+    wednesdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
+        {
+            id: wednesdayArray.value.length,
+            title: newTitle,
+            note: newNote,
+            color: newColor
+        },
+    )
+    localStorage.setItem('wednesdayData', JSON.stringify(wednesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+}
+
+function addNewObjectToThursday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
+    thursdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
+        {
+            id: thursdayArray.value.length,
+            title: newTitle,
+            note: newNote,
+            color: newColor
+        },
+    )
+    localStorage.setItem('thursdayData', JSON.stringify(thursdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+}
+
+function addNewObjectToFriday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
+    fridayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
+        {
+            id: fridayArray.value.length,
+            title: newTitle,
+            note: newNote,
+            color: newColor
+        },
+    )
+    localStorage.setItem('fridayData', JSON.stringify(fridayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+}
+
+function addNewObjectToSaturday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
+    saturdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
+        {
+            id: saturdayArray.value.length,
+            title: newTitle,
+            note: newNote,
+            color: newColor
+        },
+    )
+    localStorage.setItem('saturdayData', JSON.stringify(saturdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+}
+
+function addNewObjectToSunday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
+    sundayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
+        {
+            id: sundayArray.value.length,
+            title: newTitle,
+            note: newNote,
+            color: newColor
+        },
+    )
+    localStorage.setItem('sundayData', JSON.stringify(sundayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+}
+
 let days = [
     {
         id: 1,
@@ -78,6 +153,26 @@ let days = [
     {
         id: 2,
         name: "Tirsdag"
+    },
+    {
+        id: 3,
+        name: "Onsdag"
+    },
+    {
+        id: 4,
+        name: "Torsdag"
+    },
+    {
+        id: 5,
+        name: "Fredag"
+    },
+    {
+        id: 6,
+        name: "Lørdag"
+    },
+    {
+        id: 7,
+        name: "Søndag"
     }
 ]
 

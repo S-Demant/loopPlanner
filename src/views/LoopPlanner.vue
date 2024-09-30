@@ -5,18 +5,25 @@ import {ref} from "vue";
 
 const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
 const tuesdayArray = ref(JSON.parse(localStorage.getItem('tuesdayData') ?? '[]' ));
+const wednesdayArray = ref(JSON.parse(localStorage.getItem('wednesdayData') ?? '[]' ));
+const thursdayArray = ref(JSON.parse(localStorage.getItem('thursdayData') ?? '[]' ));
+const fridayArray = ref(JSON.parse(localStorage.getItem('fridayData') ?? '[]' ));
+const saturdayArray = ref(JSON.parse(localStorage.getItem('saturdayData') ?? '[]' ));
+const sundayArray = ref(JSON.parse(localStorage.getItem('sundayData') ?? '[]' ));
 
 const date = new Date(); // Hent aktuel dato
 const optionsFirst = { weekday: 'long' }; // Set indstillingerne for visning af ugedag
 const optionsSecond = { day: 'numeric', month: 'long' }; // Set indstillingerne for visning af dato og måned
 const nextDate = new Date(date.getTime() + 86400000); // Tilføj en ekstra dag på date med ms.
+const day3 = new Date(nextDate.getTime() + 86400000); // Tilføj en ekstra dag på nextDate med ms.
+const day4 = new Date(day3.getTime() + 86400000); // Tilføj en ekstra dag på nextDate med ms.
+const day5 = new Date(day4.getTime() + 86400000); // Tilføj en ekstra dag på nextDate med ms.
+const day6 = new Date(day5.getTime() + 86400000); // Tilføj en ekstra dag på nextDate med ms.
+const day7 = new Date(day6.getTime() + 86400000); // Tilføj en ekstra dag på nextDate med ms.
 
 function UpperCase(string){ // Funktion for at først bogstav er med stort
-    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+    return string[0].toUpperCase() + string.slice(1).toLowerCase(); // Første i string er stort bogstav, og nummer to og frem i string er lille
 }
-
-console.log(UpperCase(date.toLocaleDateString('da-DA', optionsFirst)));
-console.log(date.toLocaleDateString('da-DA', optionsSecond));
 
 </script>
 
@@ -26,40 +33,81 @@ console.log(date.toLocaleDateString('da-DA', optionsSecond));
 
         <h2 class="mb-4">Dagens plan</h2>
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-5">
-            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I dag {{ UpperCase(date.toLocaleDateString('da-DA', optionsFirst)) }} d. {{ date.toLocaleDateString('da-DA', optionsSecond) }}</h3>
-            <Plan v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I dag {{ date.toLocaleDateString('da-DA', optionsFirst) }} d. {{ date.toLocaleDateString('da-DA', optionsSecond) }}</h3>
+            <Plan v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="date.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag'" v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="date.toLocaleDateString('da-DA', optionsFirst) === 'onsdag'" v-for="(plan) in wednesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="date.toLocaleDateString('da-DA', optionsFirst) === 'torsdag'" v-for="(plan) in thursdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="date.toLocaleDateString('da-DA', optionsFirst) === 'fredag'" v-for="(plan) in fridayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="date.toLocaleDateString('da-DA', optionsFirst) === 'lørdag'" v-for="(plan) in saturdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="date.toLocaleDateString('da-DA', optionsFirst) === 'søndag'" v-for="(plan) in sundayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
         </div>
 
         <h2 class="mb-4">De kommende dages planer</h2>
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-4">
-            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I morgen {{ UpperCase(nextDate.toLocaleDateString('da-DA', optionsFirst)) }} d. {{ nextDate.toLocaleDateString('da-DA', optionsSecond) }}</h3>
-            <Plan v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I morgen {{ nextDate.toLocaleDateString('da-DA', optionsFirst) }} d. {{ nextDate.toLocaleDateString('da-DA', optionsSecond) }}</h3>
+            <Plan v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag'" v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'onsdag'" v-for="(plan) in wednesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'torsdag'" v-for="(plan) in thursdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'fredag'" v-for="(plan) in fridayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'lørdag'" v-for="(plan) in saturdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'søndag'" v-for="(plan) in sundayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
         </div>
 
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-4">
-            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">Onsdag d. 27 september</h3>
-            <div class="bg-primary w-100 py-4 px-4">
-                <span class="fs-3 text-light ms-2">Støvsugning</span>
-            </div>
-            <div class="bg-secondary w-100 py-4 px-4">
-                <span class="fs-3 text-light ms-2">Vande blomster</span>
-            </div>
-            <div class="bg-primary w-100 py-4 px-4">
-                <span class="fs-3 text-light ms-2">Græsklipning</span>
-            </div>
+            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">{{ UpperCase(day3.toLocaleDateString('da-DA', optionsFirst)) }} d. {{ day3.toLocaleDateString('da-DA', optionsSecond) }}</h3>
+            <Plan v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag'" v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'onsdag'" v-for="(plan) in wednesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'torsdag'" v-for="(plan) in thursdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'fredag'" v-for="(plan) in fridayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'lørdag'" v-for="(plan) in saturdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'søndag'" v-for="(plan) in sundayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
         </div>
 
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-4">
-            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">Torsdag d. 28 september</h3>
-            <div class="bg-primary w-100 py-4 px-4">
-                <span class="fs-3 text-light ms-2">Støvsugning</span>
-            </div>
-            <div class="bg-secondary w-100 py-4 px-4">
-                <span class="fs-3 text-light ms-2">Vande blomster</span>
-            </div>
-            <div class="bg-primary w-100 py-4 px-4">
-                <span class="fs-3 text-light ms-2">Græsklipning</span>
-            </div>
+            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">{{ UpperCase(day4.toLocaleDateString('da-DA', optionsFirst)) }} d. {{ day4.toLocaleDateString('da-DA', optionsSecond) }}</h3>
+            <Plan v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag'" v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'onsdag'" v-for="(plan) in wednesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'torsdag'" v-for="(plan) in thursdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'fredag'" v-for="(plan) in fridayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'lørdag'" v-for="(plan) in saturdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'søndag'" v-for="(plan) in sundayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+        </div>
+
+        <div class="bg-light w-100 shadow rounded-4 pb-4 mb-4">
+            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">{{ UpperCase(day5.toLocaleDateString('da-DA', optionsFirst)) }} d. {{ day5.toLocaleDateString('da-DA', optionsSecond) }}</h3>
+            <Plan v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag'" v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'onsdag'" v-for="(plan) in wednesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'torsdag'" v-for="(plan) in thursdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'fredag'" v-for="(plan) in fridayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'lørdag'" v-for="(plan) in saturdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'søndag'" v-for="(plan) in sundayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+        </div>
+
+        <div class="bg-light w-100 shadow rounded-4 pb-4 mb-4">
+            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">{{ UpperCase(day6.toLocaleDateString('da-DA', optionsFirst)) }} d. {{ day6.toLocaleDateString('da-DA', optionsSecond) }}</h3>
+            <Plan v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag'" v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'onsdag'" v-for="(plan) in wednesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'torsdag'" v-for="(plan) in thursdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'fredag'" v-for="(plan) in fridayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'lørdag'" v-for="(plan) in saturdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'søndag'" v-for="(plan) in sundayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+        </div>
+
+        <div class="bg-light w-100 shadow rounded-4 pb-4 mb-5">
+            <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">{{ UpperCase(day7.toLocaleDateString('da-DA', optionsFirst)) }} d. {{ day7.toLocaleDateString('da-DA', optionsSecond) }}</h3>
+            <Plan v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan) in mondayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag'" v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'onsdag'" v-for="(plan) in wednesdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'torsdag'" v-for="(plan) in thursdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'fredag'" v-for="(plan) in fridayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'lørdag'" v-for="(plan) in saturdayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
+            <Plan v-else-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'søndag'" v-for="(plan) in sundayArray" :picked-color="plan.color" :title="UpperCase(plan.title)" />
         </div>
 
     </div>
