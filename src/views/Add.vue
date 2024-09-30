@@ -9,18 +9,40 @@ const selectedDay = ref('');
 const selectedColor = ref('');
 let addTitle = '';
 let addNote = '';
+let alertMessageWeek = ref('');
+let alertMessageTitle = ref('');
+let alertMessageColor = ref('');
 
 function pickDay (newTitle, newNote, newColor, newDay) {
-    if (selectedDay.value > 0 && addTitle.length >= 3 && selectedColor.value.includes('#')) { // Gør følgende hvis der er værdi i ugedag, titel og farve
+
+    if (selectedDay.value > 0 && addTitle.length >= 3 && addTitle.length <= 30 && selectedColor.value.includes('#')) { // Gør følgende hvis der er værdi i ugedag, titel og farve
         newDay = selectedDay
         if (newDay.value === 1) {
             addNewObjectToMonday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
         } else if (newDay.value === 2) {
             addNewObjectToTuesday(newTitle = addTitle, newNote = addNote, newColor = selectedColor);
         }
-        router.push('.') // Gå til start
-    } else { // Gør følgende i stedet
-        return
+        router.push('/') // Gå til start
+    }
+
+    if (selectedDay.value <= 0) {
+        alertMessageWeek.value = 'Vælg en ugedag';
+    } else {
+        alertMessageWeek.value = '';
+    }
+
+    if (addTitle.length < 3) {
+        alertMessageTitle.value = 'Titel er for kort';
+    } else if (addTitle.length > 30) {
+        alertMessageTitle.value = 'Titel er for lang';
+    } else {
+        alertMessageTitle.value = '';
+    }
+
+    if (!selectedColor.value.includes('#')) {
+        alertMessageColor.value = 'Vælg en farve';
+    } else {
+        alertMessageColor.value = '';
     }
 }
 
@@ -113,29 +135,34 @@ let colors = [
     <div class="container">
         <form class="row g-3">
             <div class="col-auto">
-                <select class="form-select" aria-label="Day select" v-model="selectedDay">
-                    <option v-for="(day) in days" :value="day.id">{{ day.name }}
-                    </option>
+                <label for="daySelect" class="form-label">Vælg en ugedag *</label>
+                <select class="form-select" aria-label="daySelect" v-model="selectedDay">
+                    <option v-for="(day) in days" :value="day.id">{{ day.name }}</option>
                 </select>
+                <p class="position-absolute text-danger">{{ alertMessageWeek }}</p>
             </div>
             <div class="col-auto">
-                <label for="titleToSave" class="visually-hidden">Title</label>
-                <input type="text" class="form-control" id="titleToSave" value="" v-model="addTitle">
+                <label for="titleToSave" class="form-label">Skriv din opgave *</label>
+                <input type="text" class="form-control" aria-label="titleToSave" value="" v-model="addTitle">
+                <p class="position-absolute text-danger">{{ alertMessageTitle }}</p>
             </div>
             <div class="col-auto">
-                <select class="form-select text-light" id="color-select" aria-label="Color select" v-model="selectedColor">
+                <label for="colorSelect" class="form-label">Vælg en farve *</label>
+                <select class="form-select text-light" aria-label="colorSelect" id="color-select" v-model="selectedColor">
                     <option :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" v-for="(color) in colors">{{ color.name }}
                     </option>
                 </select>
+                <p class="position-absolute text-danger">{{ alertMessageColor }}</p>
             </div>
             <div class="col-auto">
-                <textarea v-model="addNote" placeholder=""></textarea>
+                <label for="noteToSave" class="form-label">Skriv evt. en note</label>
+                <br>
+                <textarea class="form-control" v-model="addNote" aria-label="noteToSave"></textarea>
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-primary mb-3" @click ="pickDay();">Gem titel</button>
+                <button type="button" class="btn btn-primary mb-3" @click ="pickDay();">Opret opgave</button>
             </div>
         </form>
-
         <br>
 
         <li v-for="(plan) in mondayArray" :style="{ color: plan.color }">
