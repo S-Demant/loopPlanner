@@ -1,7 +1,7 @@
 <script setup>
 import {defineProps} from "vue";
 
-const {img, title, text, pickedColor} = defineProps(['img', 'title', 'text', 'pickedColor']);
+const {id, title, note, pickedColor} = defineProps(['id', 'title', 'note', 'pickedColor']);
 
 </script>
 

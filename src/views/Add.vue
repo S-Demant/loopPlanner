@@ -19,7 +19,6 @@ let alertMessageTitle = ref('');
 let alertMessageColor = ref('');
 
 function pickDay (newTitle, newNote, newColor, newDay) {
-
     if (selectedDay.value > 0 && addTitle.length >= 3 && addTitle.length <= 30 && selectedColor.value.includes('#')) { // Gør følgende hvis der er værdi i ugedag, titel og farve
         newDay = selectedDay
         if (newDay.value === 1) {
@@ -68,9 +67,9 @@ function addNewObjectToMonday (newTitle, newNote, newColor) { // Funktion når d
             title: newTitle,
             note: newNote,
             color: newColor
-        },
+        }
     )
-    localStorage.setItem('mondayData', JSON.stringify(mondayArray.value)); // Her gemmes mondayData hver gang funktionen bliver kaldt
+    saveMonday()
 }
 
 function addNewObjectToTuesday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
@@ -80,9 +79,9 @@ function addNewObjectToTuesday (newTitle, newNote, newColor) { // Funktion når 
             title: newTitle,
             note: newNote,
             color: newColor
-        },
+        }
     )
-    localStorage.setItem('tuesdayData', JSON.stringify(tuesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+    saveTuesday()
 }
 
 function addNewObjectToWednesday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
@@ -94,7 +93,7 @@ function addNewObjectToWednesday (newTitle, newNote, newColor) { // Funktion nå
             color: newColor
         },
     )
-    localStorage.setItem('wednesdayData', JSON.stringify(wednesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+    saveWednesday()
 }
 
 function addNewObjectToThursday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
@@ -106,7 +105,7 @@ function addNewObjectToThursday (newTitle, newNote, newColor) { // Funktion når
             color: newColor
         },
     )
-    localStorage.setItem('thursdayData', JSON.stringify(thursdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+    saveThursday()
 }
 
 function addNewObjectToFriday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
@@ -118,7 +117,7 @@ function addNewObjectToFriday (newTitle, newNote, newColor) { // Funktion når d
             color: newColor
         },
     )
-    localStorage.setItem('fridayData', JSON.stringify(fridayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+    saveFriday()
 }
 
 function addNewObjectToSaturday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
@@ -130,7 +129,7 @@ function addNewObjectToSaturday (newTitle, newNote, newColor) { // Funktion når
             color: newColor
         },
     )
-    localStorage.setItem('saturdayData', JSON.stringify(saturdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+    saveSaturday()
 }
 
 function addNewObjectToSunday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
@@ -142,7 +141,70 @@ function addNewObjectToSunday (newTitle, newNote, newColor) { // Funktion når d
             color: newColor
         },
     )
-    localStorage.setItem('sundayData', JSON.stringify(sundayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+    saveSunday()
+}
+
+function removeMondaySave (mondayArray, index) {
+    mondayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
+    saveMonday()
+}
+
+function removeTuesdaySave (tuesdayArray, index) {
+    tuesdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
+    saveTuesday()
+}
+
+function removeWednesdaySave (wednesdayArray, index) {
+    wednesdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
+    saveWednesday();
+}
+
+function removeThursdaySave (thursdayArray, index) {
+    thursdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
+    saveThursday();
+}
+
+function removeFridaySave (fridayArray, index) {
+    fridayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
+    saveFriday();
+}
+
+function removeSaturdaySave (saturdayArray, index) {
+    saturdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
+    saveSaturday();
+}
+
+function removeSundaySave (sundayArray, index) {
+    sundayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
+    saveSunday();
+}
+
+function saveMonday () {
+    localStorage.setItem('mondayData', JSON.stringify(mondayArray.value)); // Her gemmes mondayData hver gang funktionen bliver kaldt
+}
+
+function saveTuesday () {
+    localStorage.setItem('tuesdayData', JSON.stringify(tuesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
+}
+
+function saveWednesday () {
+    localStorage.setItem('wednesdayData', JSON.stringify(wednesdayArray.value)); // Her gemmes wednesdayData hver gang funktionen bliver kaldt
+}
+
+function saveThursday () {
+    localStorage.setItem('thursdayData', JSON.stringify(thursdayArray.value)); // Her gemmes thursdayData hver gang funktionen bliver kaldt
+}
+
+function saveFriday () {
+    localStorage.setItem('fridayData', JSON.stringify(fridayArray.value)); // Her gemmes fridayData hver gang funktionen bliver kaldt
+}
+
+function saveSaturday () {
+    localStorage.setItem('saturdayData', JSON.stringify(saturdayArray.value)); // Her gemmes saturdayData hver gang funktionen bliver kaldt
+}
+
+function saveSunday () {
+    localStorage.setItem('sundayData', JSON.stringify(sundayArray.value)); // Her gemmes sundayData hver gang funktionen bliver kaldt
 }
 
 let days = [
@@ -273,9 +335,14 @@ let colors = [
 
         <br>
 
-        <Plan v-for="(plan) in mondayArray" :picked-color="plan.color" :title="plan.title" />
+
+
+
         <br>
-        <Plan v-for="(plan) in tuesdayArray" :picked-color="plan.color" :title="plan.title" />
+
+        <Plan v-for="(plan, index) in mondayArray" :picked-color="plan.color" :title="plan.title" :id="plan.id" :note="plan.note" @click ="removeMondaySave(mondayArray, index)" />
+        <br>
+        <Plan v-for="(plan, index) in tuesdayArray" :picked-color="plan.color" :title="plan.title" :id="plan.id" :note="plan.note" @click ="removeTuesdaySave(tuesdayArray, index)" />
 
     </div>
 </template>
