@@ -63,147 +63,77 @@ function pickDay (newTitle, newNote, newColor, newDay) {
 function addNewObjectToMonday (newTitle, newNote, newColor) { // Funktion når der tilføjes til mandag
     mondayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
-            id: mondayArray.value.length,
             title: newTitle,
             note: newNote,
             color: newColor
-        }
+        },
     )
-    saveMonday()
+    localStorage.setItem('mondayData', JSON.stringify(mondayArray.value)); // Her gemmes mondayData hver gang funktionen bliver kaldt
 }
 
 function addNewObjectToTuesday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
     tuesdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
-            id: tuesdayArray.value.length,
             title: newTitle,
             note: newNote,
             color: newColor
-        }
+        },
     )
-    saveTuesday()
+    localStorage.setItem('tuesdayData', JSON.stringify(tuesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
 }
 
 function addNewObjectToWednesday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
     wednesdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
-            id: wednesdayArray.value.length,
             title: newTitle,
             note: newNote,
             color: newColor
         },
     )
-    saveWednesday()
+    localStorage.setItem('wednesdayData', JSON.stringify(wednesdayArray.value)); // Her gemmes wednesdayData hver gang funktionen bliver kaldt
 }
 
 function addNewObjectToThursday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
     thursdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
-            id: thursdayArray.value.length,
             title: newTitle,
             note: newNote,
             color: newColor
         },
     )
-    saveThursday()
+    localStorage.setItem('thursdayData', JSON.stringify(thursdayArray.value)); // Her gemmes thursdayData hver gang funktionen bliver kaldt
 }
 
 function addNewObjectToFriday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
     fridayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
-            id: fridayArray.value.length,
             title: newTitle,
             note: newNote,
             color: newColor
         },
     )
-    saveFriday()
+    localStorage.setItem('fridayData', JSON.stringify(fridayArray.value)); // Her gemmes fridayData hver gang funktionen bliver kaldt
 }
 
 function addNewObjectToSaturday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
     saturdayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
-            id: saturdayArray.value.length,
             title: newTitle,
             note: newNote,
             color: newColor
         },
     )
-    saveSaturday()
+    localStorage.setItem('saturdayData', JSON.stringify(saturdayArray.value)); // Her gemmes saturdayData hver gang funktionen bliver kaldt
 }
 
 function addNewObjectToSunday (newTitle, newNote, newColor) { // Funktion når der tilføjes til tirsdag
     sundayArray.value.push( // Her tilføjes der endnu et objekt til array med push()
         {
-            id: sundayArray.value.length,
             title: newTitle,
             note: newNote,
             color: newColor
         },
     )
-    saveSunday()
-}
-
-function removeMondaySave (mondayArray, index) {
-    mondayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
-    saveMonday()
-}
-
-function removeTuesdaySave (tuesdayArray, index) {
-    tuesdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
-    saveTuesday()
-}
-
-function removeWednesdaySave (wednesdayArray, index) {
-    wednesdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
-    saveWednesday();
-}
-
-function removeThursdaySave (thursdayArray, index) {
-    thursdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
-    saveThursday();
-}
-
-function removeFridaySave (fridayArray, index) {
-    fridayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
-    saveFriday();
-}
-
-function removeSaturdaySave (saturdayArray, index) {
-    saturdayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
-    saveSaturday();
-}
-
-function removeSundaySave (sundayArray, index) {
-    sundayArray.splice(index, 1) // Her fjernes 1 linje svarende til index nummer
-    saveSunday();
-}
-
-function saveMonday () {
-    localStorage.setItem('mondayData', JSON.stringify(mondayArray.value)); // Her gemmes mondayData hver gang funktionen bliver kaldt
-}
-
-function saveTuesday () {
-    localStorage.setItem('tuesdayData', JSON.stringify(tuesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
-}
-
-function saveWednesday () {
-    localStorage.setItem('wednesdayData', JSON.stringify(wednesdayArray.value)); // Her gemmes wednesdayData hver gang funktionen bliver kaldt
-}
-
-function saveThursday () {
-    localStorage.setItem('thursdayData', JSON.stringify(thursdayArray.value)); // Her gemmes thursdayData hver gang funktionen bliver kaldt
-}
-
-function saveFriday () {
-    localStorage.setItem('fridayData', JSON.stringify(fridayArray.value)); // Her gemmes fridayData hver gang funktionen bliver kaldt
-}
-
-function saveSaturday () {
-    localStorage.setItem('saturdayData', JSON.stringify(saturdayArray.value)); // Her gemmes saturdayData hver gang funktionen bliver kaldt
-}
-
-function saveSunday () {
     localStorage.setItem('sundayData', JSON.stringify(sundayArray.value)); // Her gemmes sundayData hver gang funktionen bliver kaldt
 }
 
