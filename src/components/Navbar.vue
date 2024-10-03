@@ -1,5 +1,12 @@
 <script setup>
 
+function clearAllData () {
+    if (confirm('Du er ved at gendanne hele din plan.\nEr du sikker?')) {
+        localStorage.clear();
+        location.reload(); // Genindlæs den aktuelle side
+    }
+}
+
 </script>
 
 <template>
@@ -23,7 +30,7 @@
                             <RouterLink class="nav-link mx-lg-2" to="/">Information</RouterLink>
                         </li>
                         <li class="nav-item">
-                            <RouterLink class="nav-link ms-lg-2" to="/">Gendan plan</RouterLink>
+                            <span class="nav-link ms-lg-2 pointer" @click="clearAllData()">Gendan plan</span>
                         </li>
                     </ul>
                 </div>
@@ -40,5 +47,9 @@
 
 .top-bottom {
     margin-bottom: 105px;
+}
+
+.pointer:hover {
+    cursor: pointer;
 }
 </style>
