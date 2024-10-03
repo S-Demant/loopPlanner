@@ -7,17 +7,12 @@ function readNote (note) {
     alert('Din note til opgaven:\n' + note)
 }
 
-function deleteArray (index, theArray, nameData, title) {
-    console.log(index)
+function deleteArray () {
     if (confirm('Vil du slette opgaven: ' + title + '?')) {
         theArray.splice(index, 1)
         localStorage.setItem(nameData, JSON.stringify(theArray));
-        console.log('Thing was saved to the database.');
-    } else {
-        console.log('Thing was not saved to the database.');
     }
 }
-
 
 if (theArray[index].check === 'images/check-on.webp') { // Hvis check er blevet markeret tidligere, laver den det til unchecked
     theArray[index].check = 'images/check-none.webp'

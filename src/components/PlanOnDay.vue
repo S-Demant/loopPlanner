@@ -14,8 +14,6 @@ function deleteArray () {
         theArray.splice(index, 1)
         localStorage.setItem(nameData, JSON.stringify(theArray));
         console.log('Thing was saved to the database.');
-    } else {
-        console.log('Thing was not saved to the database.');
     }
 }
 
