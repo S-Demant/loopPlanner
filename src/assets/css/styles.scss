@@ -6,6 +6,7 @@ $link-decoration: none;
 
 // Colors
 $primary: #86AADA;
+$secondary: #f6fafd;
 $light: #FCFCFC;
 $dark: #797979;
 
@@ -34,6 +35,7 @@ $h3-font-size: 1.05rem;
 // 4. Include any default map overrides here
 $custom-colors: (
     "primary": $primary,
+    "secondary": $secondary,
     "light": $light,
     "dark": $dark
 );
