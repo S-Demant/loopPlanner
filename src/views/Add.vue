@@ -65,7 +65,8 @@ function addNewObjectToMonday (newTitle, newNote, newColor) { // Funktion når d
         {
             title: newTitle,
             note: newNote,
-            color: newColor
+            color: newColor,
+            check: 'images/check-none.webp'
         },
     )
     localStorage.setItem('mondayData', JSON.stringify(mondayArray.value)); // Her gemmes mondayData hver gang funktionen bliver kaldt
@@ -76,7 +77,8 @@ function addNewObjectToTuesday (newTitle, newNote, newColor) { // Funktion når 
         {
             title: newTitle,
             note: newNote,
-            color: newColor
+            color: newColor,
+            check: 'images/check-none.webp'
         },
     )
     localStorage.setItem('tuesdayData', JSON.stringify(tuesdayArray.value)); // Her gemmes tuesdayData hver gang funktionen bliver kaldt
@@ -87,7 +89,8 @@ function addNewObjectToWednesday (newTitle, newNote, newColor) { // Funktion nå
         {
             title: newTitle,
             note: newNote,
-            color: newColor
+            color: newColor,
+            check: 'images/check-none.webp'
         },
     )
     localStorage.setItem('wednesdayData', JSON.stringify(wednesdayArray.value)); // Her gemmes wednesdayData hver gang funktionen bliver kaldt
@@ -98,7 +101,8 @@ function addNewObjectToThursday (newTitle, newNote, newColor) { // Funktion når
         {
             title: newTitle,
             note: newNote,
-            color: newColor
+            color: newColor,
+            check: 'images/check-none.webp'
         },
     )
     localStorage.setItem('thursdayData', JSON.stringify(thursdayArray.value)); // Her gemmes thursdayData hver gang funktionen bliver kaldt
@@ -109,7 +113,8 @@ function addNewObjectToFriday (newTitle, newNote, newColor) { // Funktion når d
         {
             title: newTitle,
             note: newNote,
-            color: newColor
+            color: newColor,
+            check: 'images/check-none.webp'
         },
     )
     localStorage.setItem('fridayData', JSON.stringify(fridayArray.value)); // Her gemmes fridayData hver gang funktionen bliver kaldt
@@ -120,7 +125,8 @@ function addNewObjectToSaturday (newTitle, newNote, newColor) { // Funktion når
         {
             title: newTitle,
             note: newNote,
-            color: newColor
+            color: newColor,
+            check: 'images/check-none.webp'
         },
     )
     localStorage.setItem('saturdayData', JSON.stringify(saturdayArray.value)); // Her gemmes saturdayData hver gang funktionen bliver kaldt
@@ -131,7 +137,8 @@ function addNewObjectToSunday (newTitle, newNote, newColor) { // Funktion når d
         {
             title: newTitle,
             note: newNote,
-            color: newColor
+            color: newColor,
+            check: 'images/check-none.webp'
         },
     )
     localStorage.setItem('sundayData', JSON.stringify(sundayArray.value)); // Her gemmes sundayData hver gang funktionen bliver kaldt
@@ -263,16 +270,6 @@ let colors = [
             {{ plan.id }} {{ plan.title }} {{ plan.note }} {{ plan.color }}
         </li>
 
-        <br>
-
-
-
-
-        <br>
-
-        <Plan v-for="(plan, index) in mondayArray" :picked-color="plan.color" :title="plan.title" :id="plan.id" :note="plan.note" @click ="removeMondaySave(mondayArray, index)" />
-        <br>
-        <Plan v-for="(plan, index) in tuesdayArray" :picked-color="plan.color" :title="plan.title" :id="plan.id" :note="plan.note" @click ="removeTuesdaySave(tuesdayArray, index)" />
 
     </div>
 </template>

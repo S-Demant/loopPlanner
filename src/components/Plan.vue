@@ -14,9 +14,14 @@ function deleteArray (index, theArray, nameData, title) {
         localStorage.setItem(nameData, JSON.stringify(theArray));
         console.log('Thing was saved to the database.');
     } else {
-        // Do nothing!
         console.log('Thing was not saved to the database.');
     }
+}
+
+
+if (theArray[index].check === 'images/check-on.webp') { // Hvis check er blevet markeret tidligere, laver den det til unchecked
+    theArray[index].check = 'images/check-none.webp'
+    localStorage.setItem(nameData, JSON.stringify(theArray)); // Her gemmes theArray hver gang funktionen bliver kaldt
 }
 
 </script>
