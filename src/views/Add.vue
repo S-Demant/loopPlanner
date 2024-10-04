@@ -1,9 +1,11 @@
 <script setup>
 import {ref} from 'vue';
-import Plan from "@/components/Plan.vue";
+import {useRoute} from "vue-router";
 import router from "@/router/index.js";
 import Navbar from "@/components/Navbar.vue";
 
+const route = useRoute(); // Gør så route benytter funktionen useRouter()
+const weekId = parseInt(route.params.id); // Laver det medsendte parameter om til et tal, og sæt det i weekId
 const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
 const tuesdayArray = ref(JSON.parse(localStorage.getItem('tuesdayData') ?? '[]' ));
 const wednesdayArray = ref(JSON.parse(localStorage.getItem('wednesdayData') ?? '[]' ));
@@ -61,6 +63,12 @@ function pickDay (newTitle, newNote, newColor, newDay) {
     } else {
         alertMessageColor.value = '';
     }
+}
+
+if (weekId >= 0 && weekId < 8) { // Gør så der automatisk bliver valgt en ugedag, hvis der er sendt et id med
+    selectedDay.value = weekId
+} else {
+    router.push('/') // Gå til start
 }
 
 function addNewObjectToMonday (newTitle, newNote, newColor) { // Funktion når der tilføjes til mandag

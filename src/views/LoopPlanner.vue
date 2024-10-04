@@ -4,6 +4,10 @@ import Plan from "@/components/Plan.vue";
 import PlanOnDay from "@/components/PlanOnDay.vue";
 import {ref} from "vue";
 
+import {defineProps} from "vue"; // Her defineres der props fra vue
+
+const {quiz} = defineProps(['quiz']);
+
 const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
 const tuesdayArray = ref(JSON.parse(localStorage.getItem('tuesdayData') ?? '[]' ));
 const wednesdayArray = ref(JSON.parse(localStorage.getItem('wednesdayData') ?? '[]' ));
@@ -43,31 +47,31 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
             <div v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'mandag' && !mondayArray.length" class="mt-0 ms-2 ps-4">
                 <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i dag</p>
-                <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                <RouterLink :to="'/add/' + 1" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
             </div>
             <div v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag' && !tuesdayArray.length" class="mt-0 ms-2 ps-4">
                 <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i dag</p>
-                <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                <RouterLink :to="'/add/' + 2" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
             </div>
             <div v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'onsdag' && !wednesdayArray.length" class="mt-0 ms-2 ps-4">
                 <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i dag</p>
-                <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                <RouterLink :to="'/add/' + 3" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
             </div>
             <div v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'torsdag' && !thursdayArray.length" class="mt-0 ms-2 ps-4">
                 <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i dag</p>
-                <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                <RouterLink :to="'/add/' + 4" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
             </div>
             <div v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'fredag' && !fridayArray.length" class="mt-0 ms-2 ps-4">
                 <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i dag</p>
-                <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                <RouterLink :to="'/add/' + 5" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
             </div>
             <div v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'lørdag' && !saturdayArray.length" class="mt-0 ms-2 ps-4">
                 <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i dag</p>
-                <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                <RouterLink :to="'/add/' + 6" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
             </div>
             <div v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'søndag' && !sundayArray.length" class="mt-0 ms-2 ps-4">
                 <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i dag</p>
-                <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                <RouterLink :to="'/add/' + 7" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
             </div>
         </div>
     </div>
@@ -87,31 +91,31 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
                 <div v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'mandag' && !mondayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i morgen</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 1" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag' && !tuesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i morgen</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 2" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'onsdag' && !wednesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i morgen</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 3" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'torsdag' && !thursdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i morgen</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 4" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'fredag' && !fridayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i morgen</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 5" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'lørdag' && !saturdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i morgen</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 6" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'søndag' && !sundayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver i morgen</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 7" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
             </div>
 
@@ -127,31 +131,31 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
                 <div v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'mandag' && !mondayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day3.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 1" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag' && !tuesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day3.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 2" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'onsdag' && !wednesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day3.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 3"" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'torsdag' && !thursdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day3.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 4" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'fredag' && !fridayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day3.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 5" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'lørdag' && !saturdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day3.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 6" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day3.toLocaleDateString('da-DA', optionsFirst) === 'søndag' && !sundayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day3.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 7" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
             </div>
 
@@ -167,31 +171,31 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
                 <div v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'mandag' && !mondayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day4.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 1" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag' && !tuesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day4.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 2" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'onsdag' && !wednesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day4.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 3" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'torsdag' && !thursdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day4.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 4" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'fredag' && !fridayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day4.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 5" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'lørdag' && !saturdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day4.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 6" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day4.toLocaleDateString('da-DA', optionsFirst) === 'søndag' && !sundayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day4.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 7" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
             </div>
 
@@ -207,31 +211,31 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
                 <div v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'mandag' && !mondayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day5.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 1" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag' && !tuesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day5.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 2" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'onsdag' && !wednesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day5.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 3" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'torsdag' && !thursdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day5.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 4" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'fredag' && !fridayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day5.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 5" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'lørdag' && !saturdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day5.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 6" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day5.toLocaleDateString('da-DA', optionsFirst) === 'søndag' && !sundayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day5.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 7" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
             </div>
 
@@ -247,31 +251,31 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
                 <div v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'mandag' && !mondayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day6.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 1" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag' && !tuesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day6.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 2" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'onsdag' && !wednesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day6.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 3" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'torsdag' && !thursdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day6.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 4" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'fredag' && !fridayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day6.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 5" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'lørdag' && !saturdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day6.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 6" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day6.toLocaleDateString('da-DA', optionsFirst) === 'søndag' && !sundayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day6.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 7" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
             </div>
 
@@ -287,31 +291,31 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
                 <div v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'mandag' && !mondayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day7.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 1" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'tirsdag' && !tuesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day7.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 2" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'onsdag' && !wednesdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day7.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 3" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'torsdag' && !thursdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day7.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 4" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'fredag' && !fridayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day7.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 5" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'lørdag' && !saturdayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day7.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 6" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
                 <div v-if="day7.toLocaleDateString('da-DA', optionsFirst) === 'søndag' && !sundayArray.length" class="mt-0 ms-2 ps-4">
                     <p class="text-dark text-opacity-50 mb-2">Du har ingen opgaver om {{ day7.toLocaleDateString('da-DA', optionsFirst) }}en</p>
-                    <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
+                    <RouterLink :to="'/add/' + 7" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
             </div>
         </div>
@@ -327,7 +331,7 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
     <div class="fixed-bottom">
         <div class="position-absolute translate-middle start-50 bottom-0">
-            <RouterLink to="/add" class="btn-add d-flex justify-content-center align-items-center bg-light shadow">
+            <RouterLink to="/add/0" class="btn-add d-flex justify-content-center align-items-center bg-light shadow">
                 <p class="fs-1 fw-medium text-dark mb-0">+</p>
             </RouterLink>
         </div>

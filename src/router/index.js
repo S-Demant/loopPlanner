@@ -12,7 +12,7 @@ const router = createRouter({
           component: LoopPlanner
       },
       {
-          path: "/add",
+          path: "/add/:id",
           name: "add",
           component: Add
       },
