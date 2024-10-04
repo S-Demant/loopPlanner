@@ -4,7 +4,7 @@ import {defineProps} from "vue";
 const {id, index, theArray, nameData, title, note, pickedColor} = defineProps(['id', 'index', 'theArray', 'nameData', 'title', 'note', 'pickedColor']);
 
 function readNote (note) {
-    alert('Din note til opgaven:\n' + note)
+    alert('Opgavens beskrivelse:\n' + note)
 }
 
 function deleteArray () {
@@ -22,12 +22,12 @@ if (theArray[index].check === 'images/check-on.webp') { // Hvis check er blevet 
 </script>
 
 <template>
-    <div class="position-relative w-100 py-4 px-4" :style="{ backgroundColor: pickedColor }">
+    <div class="position-relative w-100 py-4 px-4 bg-gradient" :style="{ backgroundColor: pickedColor }">
         <span class="fs-3 text-light ms-2">{{ title }}</span>
         <div class="position-absolute end-0 top-50 translate-middle-y me-3 me-md-4">
             <div class="d-flex">
-                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="me-4">
-                <img :src="'images/trash.webp'" @click="deleteArray(index, theArray, nameData, title)">
+                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="pointer me-4">
+                <img :src="'images/trash.webp'" @click="deleteArray()" class="pointer">
             </div>
         </div>
     </div>

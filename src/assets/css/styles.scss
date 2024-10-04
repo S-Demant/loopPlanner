@@ -26,8 +26,6 @@ $h1-font-size: 1.50rem;
 $h2-font-size: 1.35rem;
 $h3-font-size: 1.05rem;
 
-
-
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../../../node_modules/bootstrap/scss/variables-dark";
@@ -51,6 +49,10 @@ $font-sizes: (
 @import "bootstrapComponents";
 
 // 5. Du kan lave styling her...
+html {
+    overflow-y: auto;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -64,4 +66,18 @@ body, html {
 
 h2 {
     font-weight: 600;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.bottom-nav {
+    height: 4rem;
+}
+
+.btn-add {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
 }

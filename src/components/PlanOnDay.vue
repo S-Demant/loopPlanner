@@ -1,11 +1,10 @@
 <script setup>
 import {defineProps} from "vue";
-import {ref} from 'vue';
 
 const {id, index, theArray, nameData, title, note, pickedColor, checkmark} = defineProps(['id', 'index', 'theArray', 'nameData', 'title', 'note', 'pickedColor', 'checkmark']);
 
 function readNote (note) {
-    alert('Din note til opgaven:\n' + note)
+    alert('Opgavens beskrivelse:\n' + note)
 }
 
 function deleteArray () {
@@ -29,13 +28,12 @@ function changeCheckmark () { // Ændrer checkmark når der trykkes
 </script>
 
 <template>
-    <div class="position-relative w-100 py-4 px-4" :style="{ backgroundColor: pickedColor }">
-        <img :src="checkmark" @click="changeCheckmark()" class="pe-2">
-        <span class="fs-3 text-light ms-2">{{ title }}</span>
+    <div class="position-relative w-100 py-4 px-4 bg-gradient" :style="{ backgroundColor: pickedColor }">
+        <span @click="changeCheckmark()" class="fs-3 text-light pointer ms-2"><img :src="checkmark" class="pe-2"> {{ title }}</span>
         <div class="position-absolute end-0 top-50 translate-middle-y me-3 me-md-4">
             <div class="d-flex">
-                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="me-4">
-                <img :src="'images/trash.webp'" @click="deleteArray()">
+                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="pointer me-4">
+                <img :src="'images/trash.webp'" @click="deleteArray()" class="pointer">
             </div>
         </div>
     </div>

@@ -24,10 +24,10 @@ function clearAllData () {
                 <div class="offcanvas-body py-0 px-4">
                     <ul class="navbar-nav justify-content-end flex-grow-1">
                         <li class="nav-item">
-                            <RouterLink class="nav-link" to="/add">Tilføj opgave +</RouterLink>
+                            <RouterLink class="nav-link" to="/">Min plan</RouterLink>
                         </li>
                         <li class="nav-item">
-                            <RouterLink class="nav-link" to="/">Information</RouterLink>
+                            <RouterLink class="nav-link" to="/add">Tilføj opgave +</RouterLink>
                         </li>
                         <li class="nav-item">
                             <span class="nav-link pointer" @click="clearAllData()">Nulstil plan</span>
@@ -51,9 +51,5 @@ function clearAllData () {
 
 .logo-icon {
     max-height: 2.5rem;
-}
-
-.pointer:hover {
-    cursor: pointer;
 }
 </style>

@@ -30,7 +30,7 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 <template>
     <Navbar />
     <div class="container">
-        <h2 class="mb-4">Dagens opgaver</h2>
+        <h2 class="ms-1 mb-4">Dagens opgaver</h2>
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-5">
             <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I dag {{ date.toLocaleDateString('da-DA', optionsFirst) }} d. {{ date.toLocaleDateString('da-DA', optionsSecond) }}</h3>
             <PlanOnDay v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan, index) in mondayArray" :index="index" :theArray="mondayArray" :nameData="'mondayData'" :title="UpperCase(plan.title)" :note="plan.note" :pickedColor="plan.color" :checkmark="plan.check" />
@@ -74,7 +74,7 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 
     <div class="container-fluid bg-secondary pt-4 pb-5">
         <div class="container">
-            <h2 class="mt-2 mb-4">De kommende dages opgaver</h2>
+            <h2 class="ms-1 mt-2 mb-4">De kommende dages opgaver</h2>
             <div class="bg-light w-100 shadow rounded-4 pb-4 mb-4">
                 <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I morgen {{ nextDate.toLocaleDateString('da-DA', optionsFirst) }} d. {{ nextDate.toLocaleDateString('da-DA', optionsSecond) }}</h3>
                 <Plan v-if="nextDate.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan, index) in mondayArray" :index="index" :theArray="mondayArray" :nameData="'mondayData'" :title="UpperCase(plan.title)" :note="plan.note" :pickedColor="plan.color" :checkmark="plan.check" />
@@ -314,6 +314,22 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
                     <RouterLink to="/add" class="btn btn-primary text-light fw-medium py-2 px-3">Tilføj opgave +</RouterLink>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav fixed-bottom bg-light shadow">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                <p class="fs-3 fw-medium text-dark pt-1 mt-4">Tilføj opgave</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-bottom">
+        <div class="position-absolute translate-middle start-50 bottom-0">
+            <RouterLink to="/add" class="btn-add d-flex justify-content-center align-items-center bg-light shadow">
+                <p class="fs-1 fw-medium text-dark mb-0">+</p>
+            </RouterLink>
         </div>
     </div>
 </template>

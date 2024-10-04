@@ -2,6 +2,7 @@
 import {ref} from 'vue';
 import Plan from "@/components/Plan.vue";
 import router from "@/router/index.js";
+import Navbar from "@/components/Navbar.vue";
 
 const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
 const tuesdayArray = ref(JSON.parse(localStorage.getItem('tuesdayData') ?? '[]' ));
@@ -45,10 +46,12 @@ function pickDay (newTitle, newNote, newColor, newDay) {
         alertMessageWeek.value = '';
     }
 
-    if (addTitle.length < 3) {
-        alertMessageTitle.value = 'Titel er for kort';
+    if (addTitle.length === 0) {
+        alertMessageTitle.value = 'Giv opgaven et navn';
+    } else if (addTitle.length < 3) {
+        alertMessageTitle.value = 'Opgavens navn er for kort';
     } else if (addTitle.length > 30) {
-        alertMessageTitle.value = 'Titel er for lang';
+        alertMessageTitle.value = 'Opgavens navn er for langt';
     } else {
         alertMessageTitle.value = '';
     }
@@ -178,103 +181,109 @@ let days = [
 let colors = [
     {
         id: 1,
-        name: "Rød",
-        colorCode: "#DA8686"
+        colorCode: "#9AD9E6"
     },
     {
         id: 2,
-        name: "Orange",
-        colorCode: "#DABD86"
+        colorCode: "#89C1CC"
     },
     {
         id: 3,
-        name: "Gul",
-        colorCode: "#DADA86"
+        colorCode: "#78A9B3"
     },
     {
         id: 4,
-        name: "Grøn",
-        colorCode: "#86DA89"
+        colorCode: "#679199"
     },
     {
         id: 5,
-        name: "Mint",
-        colorCode: "#86DAB0"
+        colorCode: "#597D85"
     },
     {
         id: 6,
-        name: "Lyseblå",
-        colorCode: "#86D7DA"
+        colorCode: "#9AE6D0"
     },
     {
         id: 7,
-        name: "Blå",
-        colorCode: "#86BEDA"
+        colorCode: "#89CCB9"
     },
     {
         id: 8,
-        name: "Lilla",
-        colorCode: "#869EDA"
+        colorCode: "#78B3A2"
     },
     {
         id: 9,
-        name: "Pink",
-        colorCode: "#D686DA"
+        colorCode: "#67998B"
+    },
+    {
+        id: 10,
+        colorCode: "#5B877B"
+    },
+    {
+        id: 11,
+        colorCode: "#FFDC97"
+    },
+    {
+        id: 12,
+        colorCode: "#F7CB92"
+    },
+    {
+        id: 13,
+        colorCode: "#F2BE8A"
+    },
+    {
+        id: 14,
+        colorCode: "#EDAF85"
+    },
+    {
+        id: 15,
+        colorCode: "#E69F7E"
     }
 ]
 
 </script>
 
 <template>
+    <Navbar />
     <div class="container">
-        <form class="row g-3">
-            <div class="col-auto">
-                <label for="daySelect" class="form-label">Vælg en ugedag *</label>
+        <h2 class="mb-4">Tilføj en ny opgave til din plan</h2>
+        <form class="row gy-4 gx-5">
+            <div class="col-12">
+                <label for="titleToSave" class="form-label">Opgavens navn *</label>
+                <input type="text" class="form-control" aria-label="titleToSave" value="" v-model="addTitle">
+                <p class="position-absolute text-danger">{{ alertMessageTitle }}</p>
+            </div>
+            <div class="col-6">
+                <label for="daySelect" class="form-label">Ugedag *</label>
                 <select class="form-select" aria-label="daySelect" v-model="selectedDay">
                     <option v-for="(day) in days" :value="day.id">{{ day.name }}</option>
                 </select>
                 <p class="position-absolute text-danger">{{ alertMessageWeek }}</p>
             </div>
-            <div class="col-auto">
-                <label for="titleToSave" class="form-label">Skriv din opgave *</label>
-                <input type="text" class="form-control" aria-label="titleToSave" value="" v-model="addTitle">
-                <p class="position-absolute text-danger">{{ alertMessageTitle }}</p>
-            </div>
-            <div class="col-auto">
-                <label for="colorSelect" class="form-label">Vælg en farve *</label>
-                <select class="form-select text-light" aria-label="colorSelect" id="color-select" v-model="selectedColor">
-                    <option :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" v-for="(color) in colors">{{ color.name }}
-                    </option>
+            <div class="col-6">
+                <label for="colorSelect" class="form-label">Farve *</label>
+                <select class="form-select" aria-label="colorSelect" id="color-select" v-model="selectedColor">
+                    <option :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" v-for="(color) in colors"></option>
                 </select>
                 <p class="position-absolute text-danger">{{ alertMessageColor }}</p>
             </div>
-            <div class="col-auto">
-                <label for="noteToSave" class="form-label">Skriv evt. en note</label>
+            <div class="col-12">
+                <label for="noteToSave" class="form-label">Evt. beskrivelse af opgaven *</label>
                 <br>
-                <textarea class="form-control" v-model="addNote" aria-label="noteToSave"></textarea>
+                <textarea rows="5" class="form-control" v-model="addNote" aria-label="noteToSave"></textarea>
             </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-primary mb-3" @click ="pickDay();">Opret opgave</button>
+            <div class="col-12">
+                <button type="button" class="btn btn-primary text-light fw-medium mb-3 py-2 px-5" @click ="pickDay();">Tilføj</button>
             </div>
         </form>
-        <br>
-
-        <li v-for="(plan) in mondayArray" :style="{ color: plan.color }">
-            {{ plan.id }} {{ plan.title }} {{ plan.note }} {{ plan.color }}
-        </li>
-
-        <br>
-        <br>
-
-        <li v-for="(plan) in tuesdayArray" :style="{ color: plan.color }">
-            {{ plan.id }} {{ plan.title }} {{ plan.note }} {{ plan.color }}
-        </li>
-
-
     </div>
 </template>
 
 <style scoped>
+.form-control, .form-select {
+    background-color: transparent;
+}
+
 #color-select  {
     background-color: v-bind(selectedColor)
 }
