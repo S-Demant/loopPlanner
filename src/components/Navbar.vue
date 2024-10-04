@@ -12,6 +12,10 @@ function goToPlan () {
     router.push('/') // Gå til start
 }
 
+function goToAdd () {
+    router.push('/add/0') // Gå til start
+}
+
 </script>
 
 <template>
@@ -32,7 +36,7 @@ function goToPlan () {
                             <span class="nav-link pointer" data-bs-dismiss="offcanvas" @click="goToPlan">Min plan</span>
                         </li>
                         <li class="nav-item">
-                            <RouterLink class="nav-link" to="/add/0">Tilføj opgave +</RouterLink>
+                            <span class="nav-link pointer" data-bs-dismiss="offcanvas" @click="goToAdd">Tilføj opgave +</span>
                         </li>
                         <li class="nav-item">
                             <span class="nav-link pointer" @click="clearAllData()">Nulstil plan</span>
