@@ -17,6 +17,7 @@ const saturdayArray = ref(JSON.parse(localStorage.getItem('saturdayData') ?? '[]
 const sundayArray = ref(JSON.parse(localStorage.getItem('sundayData') ?? '[]' ));
 
 const date = new Date(); // Hent aktuel dato
+const currentHour = date.getHours(); // Hent aktuel time
 const optionsFirst = { weekday: 'long' }; // Set indstillingerne for visning af ugedag
 const optionsSecond = { day: 'numeric', month: 'long' }; // Set indstillingerne for visning af dato og måned
 const nextDate = new Date(date.getTime() + 86400000); // Tilføj en ekstra dag på date med ms.
@@ -29,12 +30,18 @@ const day7 = new Date(day6.getTime() + 86400000); // Tilføj en ekstra dag på d
 function UpperCase(string){ // Funktion for at først bogstav er med stort
     return string[0].toUpperCase() + string.slice(1).toLowerCase(); // Første i string er stort bogstav, og nummer to og frem i string er lille
 }
+
 </script>
 
 <template>
     <Navbar />
     <div class="container">
-        <h2 class="ms-1 mb-4">Dagens opgaver</h2>
+        <h2 v-if="currentHour >= 18 || currentHour <= 4" class="ms-1 mb-4">Godaften. Dagens opgaver er følgende</h2>
+        <h2 v-else-if="currentHour >= 5 && currentHour <= 8" class="ms-1 mb-4">Godmorgen. Dagens opgaver er følgende</h2>
+        <h2 v-else-if="currentHour >= 10 && currentHour <= 11" class="ms-1 mb-4">God formiddag. Dagens opgaver er følgende</h2>
+        <h2 v-else-if="currentHour >= 12 && currentHour <= 14" class="ms-1 mb-4">God eftermiddag. Dagens opgaver er følgende</h2>
+        <h2 v-else-if="currentHour >= 15 && currentHour <= 17" class="ms-1 mb-4">Goddag. Dagens opgaver er følgende</h2>
+
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-5">
             <h3 class="text-dark px-4 py-4 ms-2 mt-2 mb-0">I dag {{ date.toLocaleDateString('da-DA', optionsFirst) }} d. {{ date.toLocaleDateString('da-DA', optionsSecond) }}</h3>
             <PlanOnDay v-if="date.toLocaleDateString('da-DA', optionsFirst) === 'mandag'" v-for="(plan, index) in mondayArray" :index="index" :theArray="mondayArray" :nameData="'mondayData'" :title="UpperCase(plan.title)" :note="plan.note" :pickedColor="plan.color" :checkmark="plan.check" />

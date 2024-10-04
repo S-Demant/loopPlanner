@@ -1,10 +1,15 @@
 <script setup>
+import router from "@/router/index.js";
 
 function clearAllData () {
     if (confirm('Du er ved at nulstille hele din plan.\nEr du sikker?')) {
         localStorage.clear();
         location.reload(); // Genindlæs den aktuelle side
     }
+}
+
+function goToPlan () {
+    router.push('/') // Gå til start
 }
 
 </script>
@@ -24,7 +29,7 @@ function clearAllData () {
                 <div class="offcanvas-body py-0 px-4">
                     <ul class="navbar-nav justify-content-end flex-grow-1">
                         <li class="nav-item">
-                            <RouterLink class="nav-link" to="/">Min plan</RouterLink>
+                            <span class="nav-link pointer" data-bs-dismiss="offcanvas" @click="goToPlan">Min plan</span>
                         </li>
                         <li class="nav-item">
                             <RouterLink class="nav-link" to="/add/0">Tilføj opgave +</RouterLink>
