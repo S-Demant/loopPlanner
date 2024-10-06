@@ -7,13 +7,6 @@ function readNote (note) {
     alert('Opgavens beskrivelse:\n' + note)
 }
 
-function deleteArray () {
-    if (confirm('Vil du slette opgaven: ' + title + '?')) {
-        theArray.splice(index, 1)
-        localStorage.setItem(nameData, JSON.stringify(theArray));
-    }
-}
-
 if (theArray[index].check === 'images/check-on.webp') { // Hvis check er blevet markeret tidligere, laver den det til unchecked
     theArray[index].check = 'images/check-none.webp'
     localStorage.setItem(nameData, JSON.stringify(theArray)); // Her gemmes theArray hver gang funktionen bliver kaldt
@@ -26,8 +19,7 @@ if (theArray[index].check === 'images/check-on.webp') { // Hvis check er blevet 
         <span class="fs-3 text-light ms-2">{{ title }}</span>
         <div class="position-absolute end-0 top-50 translate-middle-y me-3 me-md-4">
             <div class="d-flex">
-                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="pointer me-4">
-                <img :src="'images/trash.webp'" @click="deleteArray()" class="pointer">
+                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="pointer">
             </div>
         </div>
     </div>
