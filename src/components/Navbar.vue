@@ -21,13 +21,13 @@ function goToAdd () {
 <template>
     <nav class="navbar fixed-top bg-light shadow-sm">
         <div class="container">
-            <RouterLink class="navbar-brand text-primary fw-semibold ms-3 ms-md-0" to="/"><img :src="'/images/logo.webp'" class="logo-icon me-3">Loop Planner</RouterLink>
+            <RouterLink class="navbar-brand text-primary fw-semibold ms-3 ms-md-0" to="/"><img :src="'https://roodem.dk/loop-planner/images/logo.webp'" class="logo-icon me-3">Loop Planner</RouterLink>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header px-4 pt-4">
-                    <RouterLink to="/"><img :src="'/images/logo.webp'" class="logo-icon"></RouterLink>
+                    <RouterLink to="/"><img :src="'https://roodem.dk/loop-planner/images/logo.webp'" class="logo-icon"></RouterLink>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body py-0 px-4">
