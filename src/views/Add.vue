@@ -291,12 +291,12 @@ let colors = [
                 <p class="position-absolute text-danger">{{ alertMessageColor }}</p>
             </div>
             <div class="col-12">
-                <label for="noteToSave" class="form-label">Evt. beskrivelse af opgaven *</label>
+                <label for="noteToSave" class="form-label">Evt. beskrivelse af opgaven</label>
                 <br>
                 <textarea rows="5" class="form-control" v-model="addNote" aria-label="noteToSave"></textarea>
             </div>
             <div class="col-12">
-                <button type="button" data-bs-dismiss="offcanvas" class="btn btn-primary text-light fw-medium mb-3 py-2 px-5" @click ="pickDay();">Tilføj</button>
+                <button type="button" class="btn btn-primary text-light fw-medium mb-3 py-2 px-5" @click ="pickDay();">Tilføj</button>
             </div>
         </form>
     </div>
