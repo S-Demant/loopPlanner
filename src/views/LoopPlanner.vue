@@ -2,9 +2,8 @@
 import Navbar from "../components/Navbar.vue";
 import Plan from "@/components/Plan.vue";
 import PlanOnDay from "@/components/PlanOnDay.vue";
-import {ref} from "vue";
-
 import PlanEdit from "@/components/PlanEdit.vue";
+import {ref} from "vue";
 
 const mondayArray = ref(JSON.parse(localStorage.getItem('mondayData') ?? '[]' )); // Hvis der er en localStorage der hedder mondayData, hent den gemte fil. Hvis ikke, gør det til højre for ??
 const tuesdayArray = ref(JSON.parse(localStorage.getItem('tuesdayData') ?? '[]' ));

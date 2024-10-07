@@ -188,62 +188,77 @@ let days = [
 
 let colors = [
     {
+        name: 'Lys blå',
         id: 1,
         colorCode: "#9AD9E6"
     },
     {
+        name: 'Blå',
         id: 2,
         colorCode: "#89C1CC"
     },
     {
+        name: 'Støvet blå',
         id: 3,
         colorCode: "#78A9B3"
     },
     {
+        name: 'Dunkel blå',
         id: 4,
         colorCode: "#679199"
     },
     {
+        name: 'Mørk blå',
         id: 5,
         colorCode: "#597D85"
     },
     {
+        name: 'Lys grøn',
         id: 6,
         colorCode: "#9AE6D0"
     },
     {
+        name: 'Grøn',
         id: 7,
         colorCode: "#89CCB9"
     },
     {
+        name: 'Støvet grøn',
         id: 8,
         colorCode: "#78B3A2"
     },
     {
+        name: 'Dunkel grøn',
         id: 9,
         colorCode: "#67998B"
     },
     {
+        name: 'Mørk grøn',
         id: 10,
         colorCode: "#5B877B"
     },
     {
+        name: 'Lys beige',
         id: 11,
         colorCode: "#FFDC97"
     },
     {
+        name: 'Beige',
         id: 12,
         colorCode: "#F7CB92"
     },
     {
+        name: 'Støvet beige',
         id: 13,
         colorCode: "#F2BE8A"
     },
     {
+        name: 'Dunkel beige',
         id: 14,
         colorCode: "#EDAF85"
     },
     {
+        name: 'Mørk beige',
         id: 15,
         colorCode: "#E69F7E"
     }
@@ -271,7 +286,7 @@ let colors = [
             <div class="col-6">
                 <label for="colorSelect" class="form-label">Farve *</label>
                 <select class="form-select" aria-label="colorSelect" id="color-select" v-model="selectedColor">
-                    <option :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" v-for="(color) in colors"></option>
+                    <option :value="color.colorCode" :style="{ backgroundColor: color.colorCode}" class="text-light" v-for="(color) in colors">{{ color.name }}</option>
                 </select>
                 <p class="position-absolute text-danger">{{ alertMessageColor }}</p>
             </div>
@@ -293,6 +308,7 @@ let colors = [
 }
 
 #color-select  {
-    background-color: v-bind(selectedColor)
+    background-color: v-bind(selectedColor);
+    color: #FCFCFC;
 }
 </style>

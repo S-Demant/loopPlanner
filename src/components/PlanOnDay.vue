@@ -23,7 +23,7 @@ function changeCheckmark () { // Ændrer checkmark når der trykkes
         <span @click="changeCheckmark()" class="fs-3 text-light pointer ms-2"><img :src="checkmark" class="position-absolute pe-2"><span class="ms-5">{{ title }}</span></span>
         <div class="position-absolute end-0 top-50 translate-middle-y me-3 me-md-4">
             <div class="d-flex">
-                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="pointer me-4">
+                <img v-if="note.length > 0" :src="'images/note.webp'" @click="readNote(note)" class="pointer">
             </div>
         </div>
     </div>
