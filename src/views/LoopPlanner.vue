@@ -41,11 +41,12 @@ function UpperCase(string){ // Funktion for at først bogstav er med stort
 <template>
     <Navbar />
     <div class="container">
-        <h2 v-if="currentHour >= 18 || currentHour <= 4" class="ms-1 mb-4">Godaften. Dagens opgaver er følgende</h2>
-        <h2 v-else-if="currentHour >= 5 && currentHour <= 8" class="ms-1 mb-4">Godmorgen. Dagens opgaver er følgende</h2>
-        <h2 v-else-if="currentHour >= 10 && currentHour <= 11" class="ms-1 mb-4">God formiddag. Dagens opgaver er følgende</h2>
-        <h2 v-else-if="currentHour >= 12 && currentHour <= 14" class="ms-1 mb-4">God eftermiddag. Dagens opgaver er følgende</h2>
-        <h2 v-else-if="currentHour >= 15 && currentHour <= 17" class="ms-1 mb-4">Goddag. Dagens opgaver er følgende</h2>
+        <h2 v-if="currentHour >= 18 || currentHour <= 4" class="ms-1 ">Godaften</h2>
+        <h2 v-else-if="currentHour >= 5 && currentHour <= 8" class="ms-1">Godmorgen</h2>
+        <h2 v-else-if="currentHour >= 10 && currentHour <= 11" class="ms-1">God formiddag</h2>
+        <h2 v-else-if="currentHour >= 12 && currentHour <= 14" class="ms-1">God eftermiddag</h2>
+        <h2 v-else-if="currentHour >= 15 && currentHour <= 17" class="ms-1">Goddag</h2>
+        <h3 class="intro-text text-dark py-2 ms-1 mt-2 mb-4">Din ugentlige plan er klar til dig.<br>Skab overblik over dine daglige gøremål med din helt egen personlige plan for ugen.<br>Opret nye opgaver, skab overblik eller start på dagens opgaver nu.</h3>
         <div class="bg-light w-100 shadow rounded-4 pb-4 mb-5">
             <div class="row align-items-center">
                 <div class="col-10">
